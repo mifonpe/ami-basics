@@ -1,6 +1,6 @@
 {
     "name": "MyExampleDistribution",
-    "description": "Copies AMI to eu-west-1 and exports to S3",
+    "description": "Copies AMI to eu-west-1",
     "distributions": [
         {
             "region": "eu-west-1",
