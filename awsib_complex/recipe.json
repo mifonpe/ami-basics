@@ -8,5 +8,5 @@
         }
 
     ],
-    "parentImage": "your-source-ami-here"
+    "parentImage": "your-source-ami-arn-here"
 }

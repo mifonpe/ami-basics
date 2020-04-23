@@ -2,8 +2,8 @@
     "name": "MyJenkinsPipeline",
     "description": "Builds Jenkins images",
     "imageRecipeArn": "your-recipe-arn-here",
-    "infrastructureConfigurationArn": "your-infrastructure-config-here",
-    "distributionConfigurationArn": "your-distribution-config-here",
+    "infrastructureConfigurationArn": "your-infrastructure-config-arn-here",
+    "distributionConfigurationArn": "your-distribution-config-arn-here",
     "imageTestsConfiguration": {
         "imageTestsEnabled": true,
         "timeoutMinutes": 60
