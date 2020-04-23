@@ -1,0 +1,41 @@
+name: AMIBuilderDocument
+description: This document builds an AMI
+schemaVersion: 1.0
+
+phases:
+  - name: build
+    steps:
+      - name: Echo-some-text
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'echo "Building an AMI for Kubes & Clouds!"'
+      - name: Update-yum
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'yum update'
+      - name: Install-httpd
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'yum -y install httpd'
+      - name: enable-httpd
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'systemctl enable httpd'
+      - name: Download
+        action: S3Download
+        onFailure: Continue
+        inputs:
+          - source: s3://your-bucket-name-here/index.html
+            destination: /var/www/html/index.html
+            
+  - name: test
+    steps:
+      - name: curl-httpd
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'curl localhost'

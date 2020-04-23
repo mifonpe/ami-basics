@@ -1,0 +1,46 @@
+name: JenkinsComponent
+description: This component builds a Jenkins server using Ansible
+schemaVersion: 1.0
+
+phases:
+  - name: build
+    steps:
+      - name: InstallAnsible
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'sudo apt update'
+            - 'sudo apt install software-properties-common -y'
+            - 'sudo apt-add-repository --yes --update ppa:ansible/ansible'
+            - 'sudo apt install ansible -y'
+      - name: MakeDir
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'sudo mkdir /home/ansible'
+      - name: DownloadPlaybook
+        action: S3Download
+        onFailure: Abort
+        inputs:
+          - source: s3://your-bucket-name-here/jenkins.yml
+            destination: /home/ansible/jenkins.yml
+      - name: DownloadRequirements
+        action: S3Download
+        onFailure: Abort
+        inputs:
+          - source: s3://your-bucket-name-here/requirements.yml
+            destination: /home/ansible/requirements.yml
+      - name: ExecutePlaybook
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'cd /home/ansible'
+            - 'ansible-galaxy install -r requirements.yml'
+            - 'ansible-playbook jenkins.yml'
+  - name: test
+    steps:
+      - name: TestJenkins
+        action: ExecuteBash
+        inputs:
+          commands:
+            - 'curl localhost:8080'

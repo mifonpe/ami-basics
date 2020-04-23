@@ -1,0 +1,23 @@
+- hosts: all
+  become: true
+  vars:
+    jenkins_hostname: localhost
+    java_packages:
+      - openjdk-11-jdk
+
+  pre_tasks:
+    - name: Install gpg
+      apt:
+        name: gpg
+          
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.jenkins
+
+  tasks:
+      - name: Install some more pkgs
+        apt:
+            name:
+                - unzip 
+                - curl
+                

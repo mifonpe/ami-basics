@@ -1,0 +1,8 @@
+# External Jenkins role
+- name: geerlingguy.jenkins
+  src: git+https://github.com/geerlingguy/ansible-role-jenkins
+# External Java role
+- name: geerlingguy.java
+  src: git+https://github.com/geerlingguy/ansible-role-java
+
+

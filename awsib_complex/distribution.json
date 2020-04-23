@@ -1,0 +1,15 @@
+{
+    "name": "MyExampleDistribution",
+    "description": "Copies AMI to eu-west-1 and exports to S3",
+    "distributions": [
+        {
+            "region": "eu-west-1",
+            "amiDistributionConfiguration": {
+                "name": "Jenkins {{imagebuilder:buildDate}}",
+                "amiTags": {
+                    "owner": "kubes&clouds"
+                }
+            }
+        }
+    ]
+}

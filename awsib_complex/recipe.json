@@ -1,0 +1,12 @@
+{
+    "name": "JenkinsRecipe",
+    "description": "An example recipe that installs Jenkins.",
+    "semanticVersion": "1.0.0",
+    "components": [
+        {
+            "componentArn": "you-component-arn-here"
+        }
+
+    ],
+    "parentImage": "your-source-ami-here"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "InstallJenkins",
+    "semanticVersion": "0.0.1",
+    "description": "An example component that installs Jenkins",
+    "changeDescription": "Initial version.",
+    "platform": "Linux",
+    "uri": "s3://your-bucket-name-here/component.yaml",
+    "tags": {
+        "owner": "kubesandclouds"
+    }
+}

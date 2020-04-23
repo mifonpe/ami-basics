@@ -1,0 +1,15 @@
+{
+    "name": "MyExampleInfrastructure",
+    "description": "Infrastructure for Jenkins Build",
+    "instanceTypes": [
+        "t2.micro"
+    ],
+    "instanceProfileName": "ec2builderrole",
+    "logging": {
+        "s3Logs": {
+            "s3BucketName": "your-bucket-name-here",
+            "s3KeyPrefix": "/"
+        }
+    },
+    "terminateInstanceOnFailure": true
+}

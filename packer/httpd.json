@@ -1,0 +1,55 @@
+{
+    "variables": {
+      "aws_access_key": "",
+      "aws_secret_key": ""
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "eu-west-1",
+      "source_ami": "ami-06ce3edf0cff21f07",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "httpd {{timestamp}}",
+      "temporary_iam_instance_profile_policy_document": {
+        "Version": "2012-10-17",
+        "Statement": [
+        {
+           "Effect": "Allow",
+           "Action": [
+              "s3:Get*",
+              "s3:List*"
+           ],
+           "Resource": "*"
+        }]
+     }
+    }],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "echo 'Building an AMI for Kubes & Clouds!'"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo yum update && sudo yum -y install httpd"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo aws s3 cp s3://your-bucket-name-here/index_packer.html /var/www/html/index.html"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo systemctl enable httpd"
+            ]
+        }
+    
+    ]
+  }
